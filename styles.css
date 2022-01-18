@@ -17,7 +17,7 @@ p {
     font-size: 1em;
 }
 
-a, a:visited {
+nav a, nav a:visited {
     color: #EEEEEE;
     text-decoration: none;
 }
@@ -89,11 +89,11 @@ sup {
 
 #alert {
     padding: 25px 0;
-    background-color: #F49F0A;
+    background-color: #FFCC00;
 }
 
 #alert h2 {
-    color: white;
+    color: #111111;
     margin: 0 25px;
 }
 
