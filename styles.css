@@ -64,7 +64,7 @@ sup {
 
 #centerpiece {
     position: relative;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/presskit/Splash 2.png');
+    background: linear-gradient(rgba(20, 80, 20, 0.6), rgba(20, 80, 20, 0.6)), url('img/presskit/Splash 2.png');
     background-size: cover;
     background-position: center;
     height: 100%;
@@ -116,7 +116,7 @@ sup {
 }
 
 .accentdivider {
-    background-color: #0C1FDD;
+    background-color: #32CD32;
     width: 40px;
     height: 5px;
     margin: 25px auto;
