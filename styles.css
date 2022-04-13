@@ -9,12 +9,16 @@ body, html {
 }
 
 h1 {
-    font-size: 3em;
+    font-size: 48px;
     margin: 0 auto;
+}
+
+h2 {
+    font-size: 24px;
 }
     
 p {
-    font-size: 1em;
+    font-size: 16px;
 }
 
 nav a, nav a:visited {
@@ -59,7 +63,7 @@ sup {
 .navlink {
     margin: 0 10px 0 10px;
     display: inline-block;
-    font-size: 1em;
+    font-size: 20px;
 }
 
 #centerpiece {
