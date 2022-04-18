@@ -59,6 +59,11 @@ p {
     margin-bottom: 0;
 }
 
+#programcontainer h4 {
+    margin: 0;
+    margin-bottom: 2px;
+}
+
 #programcontainer p {
     margin-top: 0;
 }
