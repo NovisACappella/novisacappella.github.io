@@ -26,7 +26,13 @@ p {
     padding-top: 50px;
     /*width: 50%;*/
 }
+#bowtie{
+    opacity: 0;
+}
 
+#suspenders {
+    opacity: 0;
+}
 .container {
     width: calc(100% - 2*50px);
     padding: 50px;
