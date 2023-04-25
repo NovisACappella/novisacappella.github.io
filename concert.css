@@ -21,11 +21,13 @@ p {
     font-size: 16px;
 }
 
-#splash {
+ #splash {
     background-color: #1C2E3A;
-    padding-top: 50px;
-    /*width: 50%;*/
+    padding-top: 550px;
+    *width: 50%;
 }
+
+
 
 .container {
     width: calc(100% - 2*50px);
