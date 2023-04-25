@@ -23,8 +23,10 @@ p {
 
  #splash {
     background-color: #1C2E3A;
-    padding-top: 550px;
-    *width: 50%;
+    height: 700px;
+    width: 100%;
+    max-width: 100%;
+    background-repeat: no-repeat;
 }
 
 
@@ -33,18 +35,18 @@ p {
     width: calc(100% - 2*50px);
     padding: 50px;
     margin: 0;
-}
+} 
 
-.alternate {
+/*.alternate {
     background-color: #EEEEEE;
-}
+}*/
 
-.accentdivider {
+/*.accentdivider {
     background-color: #0C1FDD;
     width: 40px;
     height: 5px;
     margin: 25px auto;
-}
+} */
 
 #programcontainer {
     width: fit-content;
