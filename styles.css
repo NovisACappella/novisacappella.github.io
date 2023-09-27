@@ -68,7 +68,8 @@ sup {
 
 #centerpiece {
     position: relative;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/presskit/Splash 2.png');
+    /* background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/presskit/Splash 2.png'); */
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('img/presskit/splash\ 2023-24.png');
     background-size: cover;
     background-position: center;
     height: 100%;
