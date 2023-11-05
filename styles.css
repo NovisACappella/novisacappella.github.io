@@ -18,7 +18,7 @@ h2 {
 }
     
 p {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 nav a, nav a:visited {
@@ -115,6 +115,10 @@ sup {
     width: 150px;
     border-radius: 20px;
 }
+/* .specialheadshot {
+    width: 250px;
+    border-radius: 20px;
+} */
 
 .alternate {
     background-color: #EEEEEE;
