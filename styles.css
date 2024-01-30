@@ -93,6 +93,11 @@ sup {
     background-color: #FFCC00;
 }
 
+#alert_valentunes {
+    padding: 25px 0;
+    background-color: #F8C8DC;
+}
+
 #alert h2 {
     color: #111111;
     margin: 0 25px;
