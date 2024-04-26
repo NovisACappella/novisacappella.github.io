@@ -21,15 +21,20 @@ p {
     font-size: 16px;
 }
 
- #splash {
+/* #splash {
     background-color: #1C2E3A;
     height: 900px;
     width: 100%;
     max-width: 100%;
     background-repeat: no-repeat;
+} */
+
+.splash {
+    background-image: url('img/concert_23s/splash_bg1s23.png');
+    background-size: 100%;
+    object-fit: scale-down;
+    background-repeat: no-repeat;
 }
-
-
 
 .container {
     width: calc(100% - 2*50px);
