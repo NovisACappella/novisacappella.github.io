@@ -69,9 +69,9 @@ sup {
 #centerpiece {
     position: relative;
     /* background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/presskit/Splash 2.png'); */
-    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('img/presskit/splash\ s26.jpeg');
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('img/presskit/splash\ s26.jpg');
     background-size: cover;
-    background-position: center 40%;
+    background-position: center 10%;
     height: 100%;
     margin: 0 auto;
     color: #EEEEEE;
