@@ -25,7 +25,7 @@ except ImportError:
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HEADSHOTS = os.path.join(ROOT, "img", "headshots")
-MAX_W, MAX_H, QUALITY, MAX_BYTES = 600, 800, 82, 300 * 1024
+MAX_W, MAX_H, QUALITY, MIN_QUALITY, MAX_BYTES = 600, 800, 82, 60, 300 * 1024
 IMAGE_EXT = {".jpg", ".jpeg", ".png", ".heic", ".heif", ".webp"}
 TEXT_EXT = {".html", ".yml", ".yaml", ".md", ".css", ".js", ".json"}
 SRGB = ImageCms.ImageCmsProfile(ImageCms.createProfile("sRGB"))
@@ -38,9 +38,10 @@ def canonical(name):
 
 
 def already_done(path):
+    # No size test here: optimize() already keeps files small, and a size test would make
+    # an unusually grainy photo get re-compressed (and re-committed) on every run.
     with Image.open(path) as im:
         return (im.format == "JPEG" and im.width <= MAX_W and im.height <= MAX_H
-                and os.path.getsize(path) <= MAX_BYTES
                 and "icc_profile" not in im.info and not im.getexif())
 
 
@@ -59,8 +60,17 @@ def optimize(src, dst):
             im = ImageCms.profileToProfile(im, ImageCms.ImageCmsProfile(io.BytesIO(icc)), SRGB, outputMode="RGB")
         im.thumbnail((MAX_W, MAX_H), Image.LANCZOS)
         tmp = dst + ".tmp"
-        im.save(tmp, "JPEG", quality=QUALITY, optimize=True, progressive=True)
-    os.replace(tmp, dst)
+        try:
+            quality = QUALITY
+            while True:   # lower the quality a little if a very grainy photo comes out too big
+                im.save(tmp, "JPEG", quality=quality, optimize=True, progressive=True)
+                if os.path.getsize(tmp) <= MAX_BYTES or quality <= MIN_QUALITY:
+                    break
+                quality -= 6
+            os.replace(tmp, dst)
+        finally:
+            if os.path.exists(tmp):
+                os.remove(tmp)
 
 
 def main():

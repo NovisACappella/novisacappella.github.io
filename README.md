@@ -15,23 +15,23 @@ GitHub website: open a file, click the pencil icon to edit, then **Commit change
 1. **Save the original photos in the Officer Drive.** Put the full-size headshots
    and group photo in a folder like `Website Archive/f27/`. The website only
    keeps small copies.
-2. **Upload the new headshots.** In GitHub, open the newest folder inside
-   `img/headshots/` (for example `f26/`), then **Add file → Upload files** and
-   drop in all the new photos. The uploader can't create folders, so in the
-   next step we move them:
-   - Name each photo `<semester>-<firstname>.jpg`, e.g. `f27-jaden.jpg`.
-     Use lowercase letters and no spaces.
+2. **Upload the new headshots.** On your computer, put the new photos in one
+   folder named for the semester, for example `f27`. Name each photo
+   `<semester>-<firstname>.jpg`, e.g. `f27-jaden.jpg` (lowercase, no spaces).
+   Then in GitHub, open `img/headshots/`, click **Add file → Upload files**, and
+   drag the **whole `f27` folder** onto the page. GitHub keeps the folder name,
+   so the photos land in `img/headshots/f27/`.
    - Don't resize them first. An automatic GitHub Action shrinks them after you
      upload (see [Automations](#automations)).
-   - **Easiest way to get a new folder:** when the uploader asks you to commit,
-     choose "Create a new branch and start a pull request", then in the pull
-     request click each photo's filename and edit it to add the folder in
-     front: `f27/f27-jaden.jpg`. GitHub creates the folder for you. (Or, from
-     your computer: `git mv` the files into `img/headshots/f27/` and push.)
-3. **Make the new roster file.** Open `_data/roster/`, copy the previous
-   semester's file (for example `f26.yml`) into a new file named for the new
-   semester (`f27.yml`), and change the names, photos and roles. The comments
-   at the top of the file explain the format.
+   - If your browser won't let you drop a folder: click **Add file → Create new
+     file**, type `f27/.keep` as the file name (typing `/` makes a folder),
+     commit it, then open the new `f27` folder and upload the photos there.
+3. **Make the new roster file.** Open the previous semester's roster (for
+   example `_data/roster/f26.yml`) and click the **Copy raw file** button at
+   the top right of the file. Go back to `_data/roster/`, click **Add file →
+   Create new file**, name it for the new semester (`f27.yml`), paste, then
+   change the names, photos and roles. The comments at the top of the file
+   explain the format.
 4. **Switch the site to the new semester.** In `_config.yml`, change
    `semester: f26` to `semester: f27`.
 5. **New group photo?** Upload it to `img/splash/` as `f27-splash.jpg` and set
@@ -125,15 +125,23 @@ These run by themselves in the **Actions** tab:
 
 ## If something goes wrong
 
-- **Red X in the Actions tab** means the change wasn't published. The live
-  site keeps its last good version, so nothing is broken for visitors. Click
-  the red run to read the error. Common messages:
+- **Red X on "pages build and deployment"** means the change was **not**
+  published. The live site keeps its last good version, so nothing is broken
+  for visitors. Click the red run to read the error. Common messages:
   - `ERROR-no-roster-file-for-this-semester`: `semester:` in `_config.yml`
     doesn't match a file in `_data/roster/`.
   - `ERROR-officer-role-does-not-match-officer_roles`: a member's `role:` is
     spelled differently from the `officer_roles:` list in the roster file.
   - `ERROR-a-member-is-missing-a-photo`: someone in the roster file has no
     `photo:` line.
+  - `ERROR-semester-setting-must-look-like-f26-or-s27`: fix `semester:` in
+    `_config.yml`.
+  - `YAML Exception` or `front matter`: there is a typo between the `---`
+    lines at the top of a page, often a missing closing quote.
+- **Red X on "Check links and images"** means the change **was** published,
+  but a page now points at a file that doesn't exist (for example a photo name
+  typo, or a concert redirect to a page that isn't there). Visitors can see the
+  problem, so fix it right away. Click the red run to see which link is broken.
 - **A photo doesn't show:** check its name in the roster file matches the file
   exactly, including lowercase and `.jpg`.
 - **Undo a change:** open the commit on GitHub and use **Revert**, or edit
@@ -179,5 +187,14 @@ img/social/          social media icons
 
 Make the change on a new branch (GitHub offers this when you commit), then
 open a pull request. The link check runs on it, and you can merge when it's
-green. Advanced: install Ruby and run the site locally with the `github-pages`
-gem (`bundle exec jekyll serve`).
+green. Advanced: install Ruby, then create a file named `Gemfile` (it's kept off
+the website) containing:
+
+```
+source "https://rubygems.org"
+gem "github-pages", group: :jekyll_plugins
+gem "webrick"
+```
+
+and run `bundle install`, then `bundle exec jekyll serve`, and open
+http://localhost:4000.

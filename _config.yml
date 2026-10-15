@@ -58,6 +58,9 @@ redirect_from:
 liquid:
   error_mode: strict       # a typo in a {% %} tag fails the build instead of publishing a broken page
 
+strict_front_matter: true  # a typo between the --- lines at the top of a page (e.g. a missing quote in
+                           # concert.html) fails the build instead of publishing a blank page
+
 # Files that are not part of the website. (This list replaces Jekyll's defaults, so they are repeated here.)
 exclude:
   - README.md

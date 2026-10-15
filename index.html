@@ -84,7 +84,7 @@
             <div class="accentdivider"></div>
             {%- if site.auditions_open %}
             <p>Novis is always looking for new members! Auditions are currently open for {{ semester_name }}! All voice parts and beatboxers are welcome. You'll be asked to do a little sight-reading, sing some harmony with Novis officers, and perform a quick (less than one minute long) solo excerpt. We'll also check your vocal range.</p>
-            {%- if site.audition_signup != "" %}
+            {%- if site.audition_signup and site.audition_signup != "" %}
             <p><a href="{{ site.audition_signup }}">Click here to sign up for an audition time slot!</a></p>
             {%- endif %}
             {%- else %}

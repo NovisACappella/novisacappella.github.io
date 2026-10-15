@@ -1,11 +1,14 @@
 """Check that every local file the website links to really exists, with exact capitalization.
-Usage: python3 scripts/check_links.py _site     (run on the built site)
+Usage: python3 scripts/check_links.py _site [https://novisutd.org]   (run on the built site)
+Links to the site's own domain (redirect pages use these) are checked like local links.
 Checks src/href attributes, CSS url(...) and inline styles, and redirect pages.
 Skips HTML <!-- comments --> and CSS /* comments */, outside websites, mailto: and #anchors."""
 import os, re, sys, html
 from urllib.parse import unquote, urlsplit
 
 root = os.path.abspath(sys.argv[1])
+site_url = (sys.argv[2] if len(sys.argv) > 2 else 'https://novisutd.org').rstrip('/')
+own_origin = re.compile(r'^https?://(www\.)?' + re.escape(urlsplit(site_url).netloc) + r'(?=[/?#]|$)', re.I)
 all_files = set()
 for d, _, fs in os.walk(root):
     if '/.git' in d: continue
@@ -19,6 +22,8 @@ def exists(rel):
 
 def check(src_file, ref, base_dir):
     ref = html.unescape(ref.strip())
+    if own_origin.match(ref):
+        ref = own_origin.sub('', ref) or '/'
     if not ref or ref.startswith(('http:', 'https:', '//', 'mailto:', 'tel:', '#', 'data:', 'javascript:')): return None
     path = unquote(urlsplit(ref).path)
     if not path: return None
@@ -40,7 +45,7 @@ for rel in sorted(all_files):
     for r in refs:
         count += 1
         b = check(p, r, os.path.dirname(p))
-        if b: broken.append(b)
+        if b and b not in broken: broken.append(b)   # report each broken link once per page
 print(f'checked {count} references in {root}')
 for b in broken: print('BROKEN:', b)
 print('RESULT:', 'OK, 0 broken' if not broken else f'{len(broken)} broken')
