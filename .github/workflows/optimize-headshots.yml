@@ -1,0 +1,70 @@
+# Shrinks new member photos automatically. See README.md → Automations.
+# Runs when anything under img/headshots/ changes on master, or by hand
+# (Actions tab → Optimize headshots → Run workflow).
+name: Optimize headshots
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'img/headshots/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write   # save the smaller photos back to the repository
+  pages: write      # ask GitHub Pages to rebuild afterwards
+
+concurrency:
+  group: optimize-headshots
+  cancel-in-progress: false
+
+jobs:
+  optimize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install image tools
+        run: python3 -m pip install --quiet --break-system-packages pillow pillow-heif
+
+      - name: Shrink, rotate, convert to sRGB, strip metadata, lowercase names
+        id: optimize
+        continue-on-error: true
+        run: python3 scripts/optimize_headshots.py
+
+      - name: Save the results
+        id: push
+        run: |
+          git add -A img/headshots
+          git add -u
+          if git diff --cached --quiet; then
+            echo "Nothing to save: every headshot is already optimized."
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Optimize headshots (fit 600x800, sRGB, metadata removed)"
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              echo "pushed=true" >> "$GITHUB_OUTPUT"; exit 0
+            fi
+            echo "Someone pushed at the same time; retrying..."
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+          done
+          echo "::error::Could not save the optimized photos after 3 tries."
+          exit 1
+
+      # Commits made by this workflow don't trigger a GitHub Pages build on their own.
+      - name: Ask GitHub Pages to rebuild
+        if: steps.push.outputs.pushed == 'true' && github.ref == 'refs/heads/master'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
+
+      - name: Report photos that could not be processed
+        if: steps.optimize.outcome == 'failure'
+        run: |
+          echo "::error::Some photos could not be processed. Open the step above to see which ones."
+          exit 1

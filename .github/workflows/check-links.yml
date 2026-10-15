@@ -1,0 +1,33 @@
+# Builds the site the same way GitHub Pages does and fails (red X) if any page
+# points at an image, stylesheet, script or page that doesn't exist, including
+# wrong capitalization (photo.JPG vs photo.jpg). See README.md → Automations.
+name: Check links and images
+
+on:
+  push:
+  pull_request:
+  workflow_run:                      # re-check after the photo optimizer saves its changes
+    workflows: ['Optimize headshots']
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_branch || github.ref }}
+
+      - name: Build the site like GitHub Pages
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
+      - name: Check every link and image
+        run: python3 scripts/check_links.py _site
