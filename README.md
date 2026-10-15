@@ -15,13 +15,19 @@ GitHub website: open a file, click the pencil icon to edit, then **Commit change
 1. **Save the original photos in the Officer Drive.** Put the full-size headshots
    and group photo in a folder like `Website Archive/f27/`. The website only
    keeps small copies.
-2. **Upload the new headshots.** In GitHub, open `img/headshots/`, then
-   **Add file → Upload files**. Type the new folder name into the path (for
-   example `f27/`) and drop the photos in.
+2. **Upload the new headshots.** In GitHub, open the newest folder inside
+   `img/headshots/` (for example `f26/`), then **Add file → Upload files** and
+   drop in all the new photos. The uploader can't create folders, so in the
+   next step we move them:
    - Name each photo `<semester>-<firstname>.jpg`, e.g. `f27-jaden.jpg`.
      Use lowercase letters and no spaces.
    - Don't resize them first. An automatic GitHub Action shrinks them after you
      upload (see [Automations](#automations)).
+   - **Easiest way to get a new folder:** when the uploader asks you to commit,
+     choose "Create a new branch and start a pull request", then in the pull
+     request click each photo's filename and edit it to add the folder in
+     front: `f27/f27-jaden.jpg`. GitHub creates the folder for you. (Or, from
+     your computer: `git mv` the files into `img/headshots/f27/` and push.)
 3. **Make the new roster file.** Open `_data/roster/`, copy the previous
    semester's file (for example `f26.yml`) into a new file named for the new
    semester (`f27.yml`), and change the names, photos and roles. The comments
@@ -58,6 +64,11 @@ Everything that changes during the year is a setting near the top of
 | `show_valentunes`, `valentunes_form` | The pink Valentunes box. Turn it on in February. |
 | `program_link` | Where "the program for our latest concert" links. Leave it as `/concert`. |
 | `contact_email` | Email shown in the Content section. |
+
+`semester` must be exactly one lowercase letter (`f` or `s`) followed by two
+digits, like `f26` or `s27`. Anything else (for example `F26` or `fall26`)
+stops the build with an error that names this rule, and the live site stays on
+its last good version.
 
 Rules for editing YAML files (`.yml`):
 - Keep the spaces at the start of each line exactly as they are.

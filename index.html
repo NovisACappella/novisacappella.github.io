@@ -2,7 +2,18 @@
 # This page is built from _config.yml (settings and switches) and
 # _data/roster/<semester>.yml (the member list). Edit those files instead.
 ---
-{%- capture semester_name -%}{% if site.semester contains "f" %}Fall{% else %}Spring{% endif %} 20{{ site.semester | slice: 1, 2 }}{%- endcapture -%}
+{%- comment -%}
+  "semester" in _config.yml must look like f26 or s27 (lowercase f/s + 2 digits).
+  Anything else stops the build with a readable error instead of publishing a broken page.
+{%- endcomment -%}
+{%- assign sem = site.semester | append: "" -%}
+{%- assign sem_season = sem | slice: 0, 1 -%}
+{%- assign sem_year = sem | slice: 1, 2 -%}
+{%- assign sem_year_check = sem_year | plus: 0 | prepend: "" -%}
+{%- if sem.size != 3 or sem_year != sem_year_check -%}{% include ERROR-semester-setting-must-look-like-f26-or-s27-see-README.html %}{%- endif -%}
+{%- if sem_season == "f" -%}{%- assign semester_name = "Fall 20" | append: sem_year -%}
+{%- elsif sem_season == "s" -%}{%- assign semester_name = "Spring 20" | append: sem_year -%}
+{%- else -%}{% include ERROR-semester-setting-must-look-like-f26-or-s27-see-README.html %}{%- endif -%}
 <!DOCTYPE html>
 <html lang="en">
     <head>
