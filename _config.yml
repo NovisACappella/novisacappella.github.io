@@ -1,0 +1,72 @@
+# =====================================================================
+#  NOVIS WEBSITE SETTINGS
+#  This is the file to edit each semester. After you commit a change,
+#  the live site updates in about a minute (watch the Actions tab).
+#  true = show / on      false = hide / off
+#  Keep the spacing at the start of each line exactly as it is.
+#  Full instructions: README.md
+# =====================================================================
+
+# --- Which semester the website shows ---------------------------------
+# f = fall, s = spring, then the 2-digit year (f26 = Fall 2026).
+# This picks the roster file (_data/roster/f26.yml) and the photo folder
+# (img/headshots/f26/).
+semester: f26
+
+# Big group photo at the top of the home page (a file inside img/splash/)
+splash: f26-splash.jpg
+
+# --- Home page sections --------------------------------------------------
+show_about: true
+show_auditions: true
+show_members: true
+show_content: true
+
+# --- Auditions -------------------------------------------------------------
+# false = "auditions are closed" message + the interest form below
+# true  = "auditions are open" message + the audition sign-up link below
+auditions_open: false
+interest_form: "https://forms.gle/jE43LFgRX2n5abdz8"
+audition_signup: ""
+
+# --- Announcement bar (yellow strip under the top photo) -------------------
+show_banner: false
+banner_text: "Thank you for attending our concert! Audition information is available below!"
+
+# --- Valentunes (pink box near the top; turn on in February) ---------------
+show_valentunes: false
+valentunes_form: "https://docs.google.com/forms/d/e/1FAIpQLSeLjncLPZ7dtnUmBYUH_2eUk2EhqsUmGqO37jN9zBMJbJ_Uqg/viewform"
+
+# --- Content section ----------------------------------------------------------
+program_link: /concert          # "The program for our latest concert is available here"
+contact_email: novisutd@gmail.com
+
+
+# =====================================================================
+#  Technical settings. You shouldn't need to change anything below.
+# =====================================================================
+url: "https://novisutd.org"
+baseurl: ""
+
+plugins:
+  - jekyll-redirect-from   # keeps old links (old concert page names) working
+  - jekyll-sitemap         # builds sitemap.xml so Google can find every page
+
+redirect_from:
+  json: false
+
+liquid:
+  error_mode: strict       # a typo in a {% %} tag fails the build instead of publishing a broken page
+
+# Files that are not part of the website. (This list replaces Jekyll's defaults, so they are repeated here.)
+exclude:
+  - README.md
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - scripts/

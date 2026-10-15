@@ -1,3 +1,6 @@
+---
+# Jekyll fills in {{ site.splash }} from _config.yml
+---
 body, html {
     margin: 0;
     padding: 0;
@@ -68,8 +71,7 @@ sup {
 
 #centerpiece {
     position: relative;
-    /* background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/presskit/Splash 2.png'); */
-    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('img/presskit/f26_splash.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('img/splash/{{ site.splash }}');
     background-size: cover;
     background-position: center 10%;
     height: 100%;

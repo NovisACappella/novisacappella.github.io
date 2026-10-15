@@ -1,0 +1,69 @@
+# Fall 2026 roster. Photos are in img/headshots/f26/.
+# To make next semester's roster: copy this file, rename the copy (e.g. s27.yml),
+# edit names/photos/roles, then set "semester: s27" in _config.yml.
+
+# Officer roles, in the order they are numbered on the website (1 = first).
+officer_roles:
+  - President
+  - Vice President
+  - Music Director
+  - Head Choreographer
+  - Treasurer
+  - Social Chair
+
+# Members, grouped by voice part, in the order they appear on the website.
+# "role" is optional and must match one of the officer_roles above exactly.
+voice_parts:
+  - part: Sopranos
+    singers:
+      - name: Sadia Abdullah
+        photo: f26-sadia.jpg
+        role: Social Chair
+      - name: Jay Cheruvu
+        photo: f26-jay.jpg
+      - name: Anna Opel
+        photo: f26-anna.jpg
+        role: Treasurer
+      - name: Pranitha Tatineni
+        photo: f26-pranitha.jpg
+        role: Music Director
+      - name: Katherine Dang
+        photo: f26-katherine.jpg
+
+  - part: Altos
+    singers:
+      - name: Nhi Nguyen
+        photo: f26-nhi.jpg
+        role: Head Choreographer
+      - name: Bonnie Pham
+        photo: f26-bonnie.jpg
+        role: Music Director
+      - name: Saanvi Sharad
+        photo: f26-saanvi.jpg
+      - name: Joyce El Kareh
+        photo: f26-joyce.jpg
+      - name: Didi Igwiloh
+        photo: f26-didi.jpg
+
+  - part: Tenors
+    singers:
+      - name: Peter Hoeppner
+        photo: f26-peter.jpg
+        role: Vice President
+      - name: Ryan Ware
+        photo: f26-ryanw.jpg
+      - name: Jaden Nonis
+        photo: f26-jaden.jpg
+        role: President
+      - name: Achyuth Mathavan
+        photo: f26-achyuth.jpg
+
+  - part: Basses
+    singers:
+      - name: Ian John
+        photo: f26-ian.jpg
+      - name: Michael Bork
+        photo: f26-bork.jpg
+      - name: Andrew Thomas
+        photo: f26-andrew.jpg
+        role: Social Chair
