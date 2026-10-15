@@ -30,7 +30,7 @@ p {
 } */
 
 .splash {
-    background-image: url('img/concert_23s/splash_bg1s23.png');
+    background-image: url('/img/concerts/s24/s24-poster.jpg');
     background-size: 100%;
     object-fit: scale-down;
     background-repeat: no-repeat;

@@ -1,0 +1,26 @@
+# Site settings for GitHub Pages (Jekyll). See README.md for how to use this file.
+url: "https://novisutd.org"
+baseurl: ""
+
+plugins:
+  - jekyll-redirect-from   # keeps old links (old concert page names) working
+  - jekyll-sitemap         # builds sitemap.xml so Google can find every page
+
+redirect_from:
+  json: false
+
+liquid:
+  error_mode: strict       # a typo in a {% %} tag fails the build instead of silently publishing a broken page
+
+# Files that are not part of the website. (This list replaces Jekyll's defaults, so they are repeated here.)
+exclude:
+  - README.md
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - scripts/

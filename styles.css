@@ -68,8 +68,7 @@ sup {
 
 #centerpiece {
     position: relative;
-    /* background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img/presskit/Splash 2.png'); */
-    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('img/presskit/f26_splash.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('img/splash/f26-splash.jpg');
     background-size: cover;
     background-position: center 10%;
     height: 100%;
